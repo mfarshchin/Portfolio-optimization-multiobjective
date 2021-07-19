@@ -32,6 +32,7 @@ def index():
 def Progress():
     # perform optimization
     tmp, stk_hst, df_st = process_portfolio(portfolio)
+    print(tmp)
     optimization_results.append(tmp)
     histories.append(stk_hst)
     df_stat.append(df_st)
