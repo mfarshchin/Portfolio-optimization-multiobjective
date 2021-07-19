@@ -1,0 +1,216 @@
+<!-- http://jinja.pocoo.org/docs/2.10/templates/#escaping -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <meta charset="utf-8">
+    <title>Results page</title>
+
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-2.3.2.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-2.3.2.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-tables-2.3.2.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-2.3.2.min.js"></script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-2.3.2.min.js"></script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-tables-2.3.2.min.js"></script>
+
+</head>
+
+<body>
+    <div class='row mb-3'></div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="About">About me!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Tickers">Tickers</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <h1></h1>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <div class='row mb-5'>
+    </div>
+    <div class='container'>
+        <div class="row justify-content-md-center">
+            <h2>Results of portolio optimization</h2>
+        </div>
+        <div class='row mb-3'>
+        </div>
+        <div class="row justify-content-md-center">
+
+            <p>
+                Time history of the stocks in the portfolio and the results of portfolio optimization are presented on
+                this page.
+            </p>
+
+        </div>
+    </div>
+    <div class='row mb-5'>
+    </div>
+
+    <div class='container'>
+        <hr class="mt-2 mb-3" />
+        <p> <b>Time history of the portfolio stocks:</b>
+            <br>
+            This plot shows the time history of the stocks in the portfolio for the last 365 days. You could use the
+            drop down menu to switch between stocks.
+        <div class='row mb-5'>
+        </div>
+
+        <div class="row justify-content-md-left">
+            {{ n_layout_div|safe }}
+            {{ n_layout_script|safe }}
+        </div>
+    </div>
+    <div class='row mb-5'>
+    </div>
+
+    <div class='row mb-5'>
+    </div>
+
+    <div class='container'>
+        <hr class="mt-2 mb-3" />
+        <p> <b>Expected return and expected volitility of stocks:</b>
+            <br>
+            This plot shows the expected return (%) and expected volitility (%) of stocks in the portfolio. Note that
+            these values are calculated based on the data for the past 365 days.
+        <div class='row mb-5'>
+        </div>
+
+        <div class="row justify-content-md-left">
+            {{ e_plot_div|safe }}
+            {{ e_plot_script|safe }}
+        </div>
+    </div>
+    <div class='row mb-5'>
+    </div>
+
+    <div class='row mb-5'>
+    </div>
+    <div class='container'>
+        <hr class="mt-2 mb-3" />
+        <p> <b>Portfolio optimization plot:</b>
+            <br>
+            This plot shows the results of the multi-objective portfolio optimization. The x-axis and y-axis are
+            expected volitility and expected return. Points on this plot represent different combinations of stocks
+            (<b>weights</b>) in the portfolio. The <span style="color:magenta;"><b>magenta</b></span> square is the
+            <span style="color:magenta;"><b>current</b></span> status of the portfolio, the <span
+                style="color:red;"><b>red</b></span> points are the so called <span style="color:red;"><b>Pareto
+                    solutions</b></span> which are the result of multi-objective optimization, and <span
+                style="color:grey;"><b>grey</b></span> points show the results of a <span style="color:grey;"><b>Monte
+                    Carlo Simulation</b></span>.
+            <br>
+        <p>You can select a point from the <span style="color:red;"></span>Pareto solutions</p>span> to see the
+        properties of that solution. To select a point,
+        hover on it to see its index numbers, then insert the index number in the
+        box and press the submit buttom. The selected point will be highlighted with a <span style="color:blue;"><b>blue
+                triangle</b></span> and its associated properties will be shown in the following tables and plot.
+
+
+        <div class="row justify-content-md-center">
+            <form id='userinfoform' method='post' action="{{ url_for('Results') }}">
+                <p>
+                    Select a point on the Pareto front and enter the index number (hover on the red points and read the
+                    index number): <input type='text' name='pareto_idx' />
+                    <button type="submit" value="Submit" onclick="submit()" class="btn btn-primary">Submit</button>
+                </p>
+                {% if text_selected>=0 %}
+                <p>Index of the currently selected solution is <b>{{text_selected}}</b> which is indicated with <span
+                        style="color:blue;">blue</span> triangle in the following plots</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <div class='row mb-5'>
+    </div>
+    <div class='row mb-5'>
+    </div>
+    <div class='container'>
+        {{ plot_div|safe }}
+        {{ plot_script|safe }}
+    </div>
+    <div class='row mb-5'>
+    </div>
+    <div class='row mb-5'>
+    </div>
+    <div class='container'>
+        <hr class="mt-2 mb-3" />
+        <p> <b>Portfolio details and optimization results:</b>
+            <br>
+            Portfolio details, optimization results, and details of the selected Pareto solution (if
+            you select a Pareto solution above) are presented in the following table and plot.
+        </p>
+        <div class='row mb-5'>
+        </div>
+        <div class='container'>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        {% for col in titles %}
+                        <th class="text-center">{{col}}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in row_data %}
+                    <tr>
+                        {% for row_ in row %}
+                        <td class="text-center">{{row_}}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </thead>
+            </table>
+        </div>
+        <div class='row mb-5'>
+        </div>
+
+        <div class='container'>
+            <div class="row justify-content-md-center">
+                {{ w_plot_div|safe }}
+                {{ w_plot_script|safe }}
+            </div>
+        </div>
+        <div class='row mb-5'>
+        </div>
+
+
+</body>
+
+</html>

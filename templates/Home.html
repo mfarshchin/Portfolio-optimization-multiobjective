@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Home page</title>
+</head>
+
+<body>
+    <div class='row mb-3'></div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="Home">Home </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="About">About me!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Tickers">Tickers</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <div class='row mb-5'>
+    </div>
+    <div class='container'>
+        <div class="row justify-content-md-center">
+            <h2>Multiobjective Portfolio Optimization App</h2>
+        </div>
+        <div class='row mb-3'>
+        </div>
+        <div class="row justify-content-md-left">
+            <p>In this web app, the <a href="https://en.wikipedia.org/wiki/Portfolio_optimization">portfolio
+                    optimization</a> is formulated and solved as a <a
+                    href="https://en.wikipedia.org/wiki/Multi-objective_optimization">multiobjective optimization</a>
+                problem. <i>Expected volitility</i> and <i>expected return</i> are considered as conflicting objectives
+                of the multi-objective problem and the non-dominated sorting genetic algorithm (NSGA-II) is used for
+                optimization.</p>
+            <p>Please note that for each stock in the portfolio, only previous 365 days of prices are used as historical
+                data.</p>
+            <br>
+            <p>
+                <b>Disclaimer:</b> this web app is developed for research purposes only and <b>shall Not be used for
+                    trading or providing recommendations</b>.
+            </p>
+        </div>
+    </div>
+
+    <div class='row mb-5'>
+    </div>
+    <div class='container'>
+        <div class="row justify-content-md-center">
+            <h3>Create a portfolio</h3>
+        </div>
+    </div>
+
+    <!--form-row-->
+    <div class='row mb-3'>
+    </div>
+    <div class='container'>
+        <div class="row justify-content-md-center">
+            <p> Please make sure that all Thickers are valid and all quantities are integer values.
+                <br>
+                For a list of available tickers, please see <a href="Tickers">Tickers</a> page.
+            </p>
+        </div>
+    </div>
+    <!--form-row-->
+    <div class='row mb-5'>
+    </div>
+    <div class='container'>
+        <div class="row justify-content-md-center">
+            <form id="myForm" action="{{ url_for('index') }}" method="POST">
+
+                <div class="form-row">
+                    <table id="myTable" name="positionTable">
+                        <tr>
+                            <th class="text-left">
+                                <p class="p-2 bg-secondary text-white">Ticker</p>
+                            </th>
+                            <th class="text-left">
+                                <p class="p-2 bg-secondary text-white">Quantity (integer)</p>
+                            </th>
+                            <th class="text-left">
+                                <p class="p-2 bg-secondary text-white">Action</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th><input type='text' name='cell1_0' id='row0' placeholder="e.g. AAPL"></th>
+                            <th><input type='text' name='cell2_0' id='row0' placeholder="e.g. 10"></th>
+                            <th><button type='button' id='row0' onclick='deletePosition(0)'>Delete row</button></th>
+                        </tr>
+                    </table>
+                </div>
+                <!--form-row-->
+                <br>
+                <button type="button" onclick="addNew()">Add Row</button>
+                <hr>
+                <button type="submit" value="Submit" onclick="submit()" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        var c1 = 1;
+        var c2 = 1;
+        var c3 = 1;
+
+        function addNew() {
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = "<input type='text' value=' ' name=cell1_" + c1.toString() + " id=row" + c3.toString() + "> ";
+            cell2.innerHTML = "<input type='text' value=' ' name=cell2_" + c2.toString() + " id=row" + c3.toString() + "> ";
+            cell3.innerHTML = "<button type='button'" + " id=row" + c3.toString() + " onclick='deletePosition(" + c3.toString() + ")'>Delete row</button>";
+            c1++;
+            c2++;
+            c3++
+
+        }
+
+        function deletePosition(r) {
+            document.getElementById("row" + r + "").outerHTML = "";
+            document.getElementById("row" + r + "").outerHTML = "";
+            document.getElementById("row" + r + "").outerHTML = "";
+        }
+    </script>
+</body>
+
+</html>
