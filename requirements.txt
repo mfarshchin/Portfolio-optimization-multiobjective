@@ -1,48 +1,34 @@
-appdirs==1.4.4
-attrs @ file:///tmp/build/80754af9/attrs_1620827162558/work
 autograd==1.3
-black==19.10b0
 bokeh==2.2.3
 certifi==2021.5.30
-chardet==4.0.0
-click @ file:///tmp/build/80754af9/click_1621604852318/work
+charset-normalizer==2.0.3
+click==8.0.1
 cma==2.7.0
 cycler==0.10.0
-Flask @ file:///home/ktietz/src/ci/flask_1611932660458/work
+Flask==2.0.1
 future==0.18.2
-gunicorn==20.1.0
-idna==2.10
-importlib-metadata @ file:///opt/concourse/worker/volumes/live/bdafb81c-7edc-4122-77fe-a69839ec3c71/volume/importlib-metadata_1617877361684/work
-itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
-Jinja2 @ file:///tmp/build/80754af9/jinja2_1624781299557/work
+idna==3.2
+itsdangerous==2.0.1
+Jinja2==3.0.1
 kiwisolver==1.3.1
 lxml==4.6.3
-MarkupSafe @ file:///opt/concourse/worker/volumes/live/1bcf0940-5bf8-4171-61e3-2133f5885e8b/volume/markupsafe_1621528148241/work
+MarkupSafe==2.0.1
 matplotlib==3.4.2
-mkl-fft==1.3.0
-mkl-random @ file:///opt/concourse/worker/volumes/live/ee9c6651-7474-4ea3-40dc-9000610cf5d2/volume/mkl_random_1618853976708/work
-mkl-service==2.3.0
 multitasking==0.0.9
-mypy-extensions==0.4.1
-numpy @ file:///opt/concourse/worker/volumes/live/43c6229c-0418-40f9-7644-06e35c2c24e6/volume/numpy_and_numpy_base_1620831187393/work
+numpy==1.21.1
 packaging==21.0
 pandas==1.3.0
-pathspec==0.7.0
 Pillow==8.3.1
 pymoo==0.4.2.2
 pyparsing==2.4.7
-python-dateutil==2.8.1
+python-dateutil==2.8.2
 pytz==2021.1
 PyYAML==5.4.1
-regex @ file:///opt/concourse/worker/volumes/live/08824f63-10fa-4be0-7a4a-512e20e854fa/volume/regex_1625610434273/work
-requests==2.25.1
+requests==2.26.0
 scipy==1.7.0
-six @ file:///tmp/build/80754af9/six_1623709665295/work
-toml @ file:///tmp/build/80754af9/toml_1616166611790/work
+six==1.16.0
 tornado==6.1
-typed-ast @ file:///opt/concourse/worker/volumes/live/c2210c24-bb2d-4474-77f5-1bc9bf1cb79f/volume/typed-ast_1624953683856/work
-typing-extensions @ file:///tmp/build/80754af9/typing_extensions_1624965014186/work
+typing-extensions==3.10.0.0
 urllib3==1.26.6
-Werkzeug @ file:///home/ktietz/src/ci/werkzeug_1611932622770/work
+Werkzeug==2.0.1
 yfinance==0.1.62
-zipp @ file:///tmp/build/80754af9/zipp_1625570634446/work
