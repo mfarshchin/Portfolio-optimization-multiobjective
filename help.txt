@@ -1,0 +1,10 @@
+1. git init
+2. git add .
+3. git commit -m 'initial commit'
+4. heroku create multiobjective-portfolio-opt
+5. git push heroku main  
+6. heroku addons:create redistogo:nano
+7. heroku config --app multiobjective-portfolio-opt | grep REDISTOGO_URL
+8. heroku scale worker=1
+9. heroku logs -t -p worker
+10. heroku run worker 
