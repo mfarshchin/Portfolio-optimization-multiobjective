@@ -1,6 +1,10 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, url_for, render_template_string
 from optimization import *
 from plotting import *
+from rq import Queue
+from rq.job import Job
+from worker import conn
+q = Queue(connection=conn)
 
 app = Flask(__name__)
 portfolio = {}
@@ -25,19 +29,27 @@ def index():
         portfolio.clear()
         for i in range(0, len(userInputs), 2):
             portfolio[userInputs[i].strip()] = int(userInputs[i + 1].strip())
-        return render_template("Redirect.html")  # this page will show
+        # perform optimization
+        job = q.enqueue(process_portfolio, portfolio)
+        return redirect(url_for('progress', id=job.id)) # this page will show 
 
 
-@app.route("/Progress")
-def Progress():
-    # perform optimization
-    tmp, stk_hst, df_st = process_portfolio(portfolio)
-    optimization_results.append(tmp)
-    print(optimization_results)
-    histories.append(stk_hst)
-    df_stat.append(df_st)
-    return jsonify("")
-
+@app.route('/progress/<string:id>')
+def progress(id):
+    job = Job.fetch(id, connection=conn)
+    status = job.get_status()
+    if status in ['queued', 'started', 'deferred']:
+        return render_template("Redirect.html", refresh=True)
+    elif status in ['failed']:
+        return render_template("Failure.html")
+    elif status == 'finished':
+        (tmp, stk_hst, df_st) = job.result 
+        optimization_results.append(tmp)
+        # print(optimization_results)
+        histories.append(stk_hst)
+        df_stat.append(df_st)
+        return redirect(url_for('Results')) # this page will show 
+    
 
 @app.route("/Results", methods=["GET", "POST"])
 def Results():
@@ -168,4 +180,4 @@ def Tickers():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

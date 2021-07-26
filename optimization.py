@@ -180,7 +180,7 @@ def process_portfolio(portfolio):
         "allocation": allocation,
         "allocated_weights": allocated_weights,
     }
-    return output, df_list_full, df_stat
+    return (output, df_list_full, df_stat)
 
 
 def Solutions(df_res, X, portfolio, allocation, allocated_weights, idx):
